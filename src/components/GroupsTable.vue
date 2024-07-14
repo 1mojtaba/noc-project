@@ -333,7 +333,7 @@ const handleProductChange = (group) => {
 
 setInterval(async () => {
   await getGroups();
-}, 50000);
+}, 5000);
 setInterval(() => {
   Groups.archive();
 }, 8000);
