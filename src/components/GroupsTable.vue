@@ -370,20 +370,12 @@ setInterval(() => {
           <td style="direction: rtl">{{ group.comment === null ? '-' : group.comment }}</td>
           <td>
             <select v-model="group.Product" class="select select-bordered" @change="handleProductChange(group)">
-              <option disabled value="">Select a tag</option>
-              <option value="IaaS">IaaS</option>
-              <option value="CDN">CDN</option>
-              <option value="VOD">VOD</option>
-              <option value="Object">Object</option>
-              <option value="CaaS">CaaS</option>
-              <option value="DBaaS">DBaaS</option>
-              <option value="Panel">Panel</option>
-              <option value="Abuse">Abuse</option>
+              <option disabled value= {{ group.Product }}>{{ group.Product }}</option> 
             </select>
           </td>
           <td>
             <select v-model="group.tag" class="select select-bordered">
-              <option disabled value="">Select a tag</option>
+              <option disabled value={{ group.tag }}>{{ group.tag }}</option>
               <option v-for="tag in updateSecondTagOptions(group.Product)" :key="tag">{{ tag }}</option>
             </select>
           </td>
