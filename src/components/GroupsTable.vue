@@ -96,6 +96,8 @@ const states = reactive({
     show: false,
     comment: '',
     name: '',
+    selectedProduct: '',
+    selectedTag: '',
   },
   deleteGroupModal: {
     show: false,
