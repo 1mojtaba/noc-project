@@ -326,9 +326,9 @@ const updateSecondTagOptions = (Product) => {
       return [];
   }
 };
- 
+
 const handleProductChange = (group) => {
-  group.Tag = ''; 
+  group.Tag = '';
 };
 
 setInterval(async () => {
@@ -347,9 +347,9 @@ setInterval(() => {
         <input type="checkbox" class="toggle toggle-primary" @change="changeGroupStatus()" />
       </label>
       <a class="btn btn-ghost text-xl">NOC Notifier</a>
-      <Navbar/>
+      <Navbar />
     </div>
-    
+
     <table class="table table-zebra transition-shadow" style="text-align: center!important;">
       <thead class="bg-primary text-black">
         <tr>
@@ -370,22 +370,20 @@ setInterval(() => {
           <td>{{ group.date }}</td>
           <td style="direction: rtl">{{ group.comment === null ? '-' : group.comment }}</td>
           <td>
-            <select v-model="group.selectedProduct" class="select select-bordered" @change="handleProductChange(group)">
-              <option disabled>{{ group.Product }}</option> 
-            </select>
+            {{ group.selectedProduct }}
           </td>
           <td>
-            <select v-model="group.tag" class="select select-bordered">
-              <option disabled>{{ group.Tag }}</option>
-              <!-- <option v-for="tag in updateSecondTagOptions(selectedProduct)" :key="tag">{{ tag }}</option> -->
-            </select>
+            {{ group.selectedTag }}
           </td>
           <td>
-            <button v-if="states.groupStatus === 'active'" @click="states.editCommentModal = {topicID: group.id, show: true, name: group.name, comment: group.comment}" class="btn btn-outline btn-primary btn-sm">Edit</button>
+            <button v-if="states.groupStatus === 'active'"
+              @click="states.editCommentModal = { topicID: group.id, show: true, name: group.name, comment: group.comment }"
+              class="btn btn-outline btn-primary btn-sm">Edit</button>
             <span v-else>-</span>
           </td>
           <td>
-            <button v-if="states.groupStatus === 'active'" class="btn btn-outline btn-error btn-sm" @click="states.deleteGroupModal = { topicID: group.id, name: group.name, show: true }">Delete</button>
+            <button v-if="states.groupStatus === 'active'" class="btn btn-outline btn-error btn-sm"
+              @click="states.deleteGroupModal = { topicID: group.id, name: group.name, show: true }">Delete</button>
             <span v-else>-</span>
           </td>
         </tr>
@@ -393,45 +391,39 @@ setInterval(() => {
     </table>
   </div>
 
-  <Modal name="edit-comment"
-         title="Edit comment"
-         :show="states.editCommentModal.show"
-         type="confirm"
-         :on-success="edit"
-         :on-success-args="[states.editCommentModal.topicID, states.editCommentModal.comment, states.editCommentModal.selectedProduct, states.editCommentModal.selectedTag]"
-         @update="editCommentShowUpdateHandler">
+  <Modal name="edit-comment" title="Edit comment" :show="states.editCommentModal.show" type="confirm" :on-success="edit"
+    :on-success-args="[states.editCommentModal.topicID, states.editCommentModal.comment, states.editCommentModal.selectedProduct, states.editCommentModal.selectedTag]"
+    @update="editCommentShowUpdateHandler">
     <div style="text-align: center">
       <span style="direction: rtl; font-weight: bold">{{ states.editCommentModal.name }}</span>
-      <select v-model="states.editCommentModal.selectedProduct" class="select select-bordered" @change="handleproductChange(group)">
-  <option disabled value="Select a tag" >Select a tag</option>
-  <option value="IaaS">IaaS</option>
-  <option value="CDN">CDN</option>
-  <option value="VOD">VOD</option>
-  <option value="Object">Object</option>
-  <option value="CaaS">CaaS</option>
-  <option value="DBaaS">DBaaS</option>
-  <option value="Panel">Panel</option>
-  <option value="Abuse">Abuse</option>
-</select>
-<select v-model="states.editCommentModal.selectedTag" class="select select-bordered">
-  <option disabled value="Select a tag">Select a tag</option>
-  <option v-for="tag in updateSecondTagOptions(states.editCommentModal.selectedProduct)" :key="tag">{{ tag }}</option>
-</select>
+      <div>
+        <select style="display: block;" v-model="states.editCommentModal.selectedProduct" class="select select-bordered"
+        @change="handleproductChange(group)">
+        <option disabled value="Select a tag">Select a tag</option>
+        <option value="IaaS">IaaS</option>
+        <option value="CDN">CDN</option>
+        <option value="VOD">VOD</option>
+        <option value="Object">Object</option>
+        <option value="CaaS">CaaS</option>
+        <option value="DBaaS">DBaaS</option>
+        <option value="Panel">Panel</option>
+        <option value="Abuse">Abuse</option>
+      </select>
+      <select style="display: block;" v-model="states.editCommentModal.selectedTag" class="select select-bordered">
+        <option disabled value="Select a tag">Select a tag</option>
+        <option v-for="tag in updateSecondTagOptions(states.editCommentModal.selectedProduct)" :key="tag">{{ tag }}
+        </option>
+      </select>
+      </div>
 
-      <textarea v-model="states.editCommentModal.comment"
-                class="textarea textarea-bordered"
-                style="width: 100%; margin-top: 20px; direction: rtl"
-                placeholder="Comment message"></textarea>
+      <textarea v-model="states.editCommentModal.comment" class="textarea textarea-bordered"
+        style="width: 100%; margin-top: 20px; direction: rtl" placeholder="Comment message"></textarea>
     </div>
   </Modal>
 
-  <Modal name="delete-group"
-         title="Delete group"
-         :show="states.deleteGroupModal.show"
-         type="confirm"
-         :on-success="Groups.deleteGroup"
-         :on-success-args="[states.deleteGroupModal.topicID, states.deleteGroupModal.name]"
-         @update="deleteGroupShowUpdateHandler">
+  <Modal name="delete-group" title="Delete group" :show="states.deleteGroupModal.show" type="confirm"
+    :on-success="Groups.deleteGroup" :on-success-args="[states.deleteGroupModal.topicID, states.deleteGroupModal.name]"
+    @update="deleteGroupShowUpdateHandler">
     Are you sure you want to delete the thread for {{ states.deleteGroupModal.name }} group?
   </Modal>
 </template>
