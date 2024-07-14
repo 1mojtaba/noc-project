@@ -397,9 +397,9 @@ setInterval(() => {
     <div style="text-align: center">
       <span style="direction: rtl; font-weight: bold">{{ states.editCommentModal.name }}</span>
       <div style="margin-top: 20px">
+        <span>Select Product</span>
         <select style="display: inline; margin-right: 20px" v-model="states.editCommentModal.selectedProduct" class="select select-bordered"
         @change="handleproductChange(group)">
-        <span>Select Product</span>
         <option disabled value="Select a tag">Select Product tag</option>
         <option :selected="states.editCommentModal.selectedProduct == 'IaaS'" value="IaaS">IaaS</option>
         <option :selected="states.editCommentModal.selectedProduct == 'CDN'" value="CDN">CDN</option>
@@ -410,8 +410,8 @@ setInterval(() => {
         <option :selected="states.editCommentModal.selectedProduct == 'Panel'" value="Panel">Panel</option>
         <option :selected="states.editCommentModal.selectedProduct == 'Abuse'" value="Abuse">Abuse</option>
       </select>
+      <span> Select Product Tag </span>
       <select style="display: block;" v-model="states.editCommentModal.selectedTag" class="select select-bordered">
-        <span> Select Product Tag </span>
         <option disabled value="Select a tag">Select a tag</option>
         <option v-for="tag in updateSecondTagOptions(states.editCommentModal.selectedProduct)" :selected="states.editCommentModal.selectedTag == tag" :key="tag">{{ tag }}
         </option>
