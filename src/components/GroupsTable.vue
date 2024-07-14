@@ -8,7 +8,7 @@ import edit from "../scripts/comment.js";
 import Modal from "./Modal.vue";
 import Navbar from "./Navbar.vue";
 
-const getGroups = async (groups = demoGroups) => {
+const getGroups = async (groups = null) => {
   if (groups === null) {
     groups = await Groups.getGroups();
   }
