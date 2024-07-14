@@ -353,7 +353,7 @@ setInterval(() => {
           <th>Acknowledged by</th>
           <th>Start date</th>
           <th>Comment</th>
-          <th>Proudoct</th>
+          <th>Product</th>
           <th>Tag</th>
           <th>Edit comment</th>
           <th>Delete group</th>
