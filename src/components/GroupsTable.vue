@@ -331,7 +331,7 @@ const handleProudoctChange = (group) => {
 
 setInterval(async () => {
   await getGroups();
-}, 3000);
+}, 50000);
 setInterval(() => {
   Groups.archive();
 }, 8000);
