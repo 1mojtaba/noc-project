@@ -30,7 +30,7 @@ const getGroups = async (groups = null) => {
       ack: group.AcknowledgeBy,
       date: group.Time,
       comment: group.Comment,
-      selectedProduct: group.Proudoct,
+      selectedProduct: group.Product,
       selectedTag: group.tag
     });
   });
@@ -60,7 +60,7 @@ const getArchivedGroups = groups => {
       ack: group.AcknowledgeBy,
       date: group.Time,
       comment: group.Comment,
-      selectedProduct: group.Proudoct,
+      selectedProduct: group.Product,
       selectedTag: group.tag,
     });
   });
@@ -119,8 +119,8 @@ const deleteGroupShowUpdateHandler = () => {
   states.deleteGroupModal.show = false;
 };
 
-const updateSecondTagOptions = (Proudoct) => {
-  switch (Proudoct) {
+const updateSecondTagOptions = (Product) => {
+  switch (Product) {
     case 'IaaS':
       return [
         "IaaS-Accounting",
@@ -325,7 +325,7 @@ const updateSecondTagOptions = (Proudoct) => {
   }
 };
  
-const handleProudoctChange = (group) => {
+const handleProductChange = (group) => {
   group.tag = ''; 
 };
 
@@ -368,7 +368,7 @@ setInterval(() => {
           <td>{{ group.date }}</td>
           <td style="direction: rtl">{{ group.comment === null ? '-' : group.comment }}</td>
           <td>
-            <select v-model="group.Proudoct" class="select select-bordered" @change="handleProudoctChange(group)">
+            <select v-model="group.Product" class="select select-bordered" @change="handleProductChange(group)">
               <option disabled value="">Select a tag</option>
               <option>IaaS</option>
               <option>CDN</option>
@@ -383,7 +383,7 @@ setInterval(() => {
           <td>
             <select v-model="group.tag" class="select select-bordered">
               <option disabled value="">Select a tag</option>
-              <option v-for="tag in updateSecondTagOptions(group.Proudoct)" :key="tag">{{ tag }}</option>
+              <option v-for="tag in updateSecondTagOptions(group.Product)" :key="tag">{{ tag }}</option>
             </select>
           </td>
           <td>
