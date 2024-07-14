@@ -371,12 +371,12 @@ setInterval(() => {
           <td style="direction: rtl">{{ group.comment === null ? '-' : group.comment }}</td>
           <td>
             <select v-model="group.selectedProduct" class="select select-bordered" @change="handleProductChange(group)">
-              <option disabled value= {{ group.Product }}>{{ group.Product }}</option> 
+              <option disabled>{{ group.Product }}</option> 
             </select>
           </td>
           <td>
             <select v-model="group.tag" class="select select-bordered">
-              <option disabled value={{ group.Tag }}>{{ group.Tag }}</option>
+              <option disabled>{{ group.Tag }}</option>
               <!-- <option v-for="tag in updateSecondTagOptions(selectedProduct)" :key="tag">{{ tag }}</option> -->
             </select>
           </td>
