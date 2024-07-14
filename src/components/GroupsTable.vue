@@ -14,6 +14,7 @@ const getGroups = async (groups = null) => {
   }
 
   let activeGroups = [];
+  console.log(groups)
 
   groups.map(group => {
     if (!group.hasOwnProperty('Is_new')) {
@@ -31,7 +32,7 @@ const getGroups = async (groups = null) => {
       date: group.Time,
       comment: group.Comment,
       selectedProduct: group.Product,
-      selectedTag: group.tag
+      selectedTag: group.Tag
     });
   });
 
@@ -60,8 +61,8 @@ const getArchivedGroups = groups => {
       ack: group.AcknowledgeBy,
       date: group.Time,
       comment: group.Comment,
-      selectedProduct: group.selectedProduct,
-      selectedTag: group.tag,
+      selectedProduct: group.Product,
+      selectedTag: group.Tag,
     });
   });
 
@@ -326,9 +327,9 @@ const updateSecondTagOptions = (Product) => {
   }
 };
  
-// const handleProductChange = (group) => {
-//   group.tag = ''; 
-// };
+const handleProductChange = (group) => {
+  group.Tag = ''; 
+};
 
 setInterval(async () => {
   await getGroups();
@@ -370,13 +371,13 @@ setInterval(() => {
           <td style="direction: rtl">{{ group.comment === null ? '-' : group.comment }}</td>
           <td>
             <select v-model="group.selectedProduct" class="select select-bordered" @change="handleProductChange(group)">
-              <option disabled value= {{ group.selectedProduct }}>{{ group.selectedProduct }}</option> 
+              <option disabled value= {{ group.Product }}>{{ group.Product }}</option> 
             </select>
           </td>
           <td>
             <select v-model="group.tag" class="select select-bordered">
-              <option disabled value={{ selectedTag }}>{{ selectedTag }}</option>
-              <option v-for="tag in updateSecondTagOptions(selectedProduct)" :key="tag">{{ tag }}</option>
+              <option disabled value={{ group.Tag }}>{{ group.Tag }}</option>
+              <!-- <option v-for="tag in updateSecondTagOptions(selectedProduct)" :key="tag">{{ tag }}</option> -->
             </select>
           </td>
           <td>
