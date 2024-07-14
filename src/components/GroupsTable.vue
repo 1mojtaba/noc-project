@@ -396,8 +396,8 @@ setInterval(() => {
     @update="editCommentShowUpdateHandler">
     <div style="text-align: center">
       <span style="direction: rtl; font-weight: bold">{{ states.editCommentModal.name }}</span>
-      <div>
-        <select style="display: block;" v-model="states.editCommentModal.selectedProduct" class="select select-bordered"
+      <div style="margin-top: 20px">
+        <select style="display: inline; margin-right: 20px" v-model="states.editCommentModal.selectedProduct" class="select select-bordered"
         @change="handleproductChange(group)">
         <option disabled value="Select a tag">Select a tag</option>
         <option :selected="states.editCommentModal.selectedProduct == 'IaaS'" value="IaaS">IaaS</option>
