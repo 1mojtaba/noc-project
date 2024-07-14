@@ -377,7 +377,7 @@ setInterval(() => {
           </td>
           <td>
             <button v-if="states.groupStatus === 'active'"
-              @click="states.editCommentModal = { topicID: group.id, show: true, name: group.name, comment: group.comment }"
+              @click="states.editCommentModal = { topicID: group.id, show: true, name: group.name, comment: group.comment, selectedProduct: group.selectedProduct, selectedTag: group.selectedTag }"
               class="btn btn-outline btn-primary btn-sm">Edit</button>
             <span v-else>-</span>
           </td>
@@ -400,18 +400,18 @@ setInterval(() => {
         <select style="display: block;" v-model="states.editCommentModal.selectedProduct" class="select select-bordered"
         @change="handleproductChange(group)">
         <option disabled value="Select a tag">Select a tag</option>
-        <option value="IaaS">IaaS</option>
-        <option value="CDN">CDN</option>
-        <option value="VOD">VOD</option>
-        <option value="Object">Object</option>
-        <option value="CaaS">CaaS</option>
-        <option value="DBaaS">DBaaS</option>
-        <option value="Panel">Panel</option>
-        <option value="Abuse">Abuse</option>
+        <option :selected="states.editCommentModal.selectedProduct == 'IaaS'" value="IaaS">IaaS</option>
+        <option :selected="states.editCommentModal.selectedProduct == 'CDN'" value="CDN">CDN</option>
+        <option :selected="states.editCommentModal.selectedProduct == 'VOD'" value="VOD">VOD</option>
+        <option :selected="states.editCommentModal.selectedProduct == 'Object'" value="Object">Object</option>
+        <option :selected="states.editCommentModal.selectedProduct == 'CaaS'" value="CaaS">CaaS</option>
+        <option :selected="states.editCommentModal.selectedProduct == 'DBaaS'" value="DBaaS">DBaaS</option>
+        <option :selected="states.editCommentModal.selectedProduct == 'Panel'" value="Panel">Panel</option>
+        <option :selected="states.editCommentModal.selectedProduct == 'Abuse'" value="Abuse">Abuse</option>
       </select>
       <select style="display: block;" v-model="states.editCommentModal.selectedTag" class="select select-bordered">
         <option disabled value="Select a tag">Select a tag</option>
-        <option v-for="tag in updateSecondTagOptions(states.editCommentModal.selectedProduct)" :key="tag">{{ tag }}
+        <option v-for="tag in updateSecondTagOptions(states.editCommentModal.selectedProduct)" :selected="states.editCommentModal.selectedTag == tag" :key="tag">{{ tag }}
         </option>
       </select>
       </div>
