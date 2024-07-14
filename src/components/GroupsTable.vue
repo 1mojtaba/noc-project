@@ -7,8 +7,33 @@ import Groups from '../scripts/groups.js';
 import edit from "../scripts/comment.js";
 import Modal from "./Modal.vue";
 import Navbar from "./Navbar.vue";
-
-const getGroups = async (groups = null) => {
+const demoGroups = [
+  {
+    topicID: 1,
+    GroupName: "Group Alpha",
+    AcknowledgeBy: "John Doe",
+    Time: "2024-07-10",
+    Comment: "Initial setup completed.",
+    Is_new: 1,
+  },
+  {
+    topicID: 2,
+    GroupName: "Group Beta",
+    AcknowledgeBy: "Jane Smith",
+    Time: "2024-07-11",
+    Comment: "Pending review.",
+    Is_new: 1,
+  },
+  {
+    topicID: 3,
+    GroupName: "Group Gamma",
+    AcknowledgeBy: "Alice Johnson",
+    Time: "2024-07-12",
+    Comment: "Needs approval.",
+    Is_new: 0,
+  },
+];
+const getGroups = async (groups = demoGroups) => {
   if (groups === null) {
     groups = await Groups.getGroups();
   }
@@ -68,7 +93,8 @@ const getArchivedGroups = groups => {
   states.archivedGroups = archivedGroups;
 };
 
-const changeGroupStatus = async (status = null) => {
+
+const changeGroupStatus = async (status = demoGroups) => {
   if (status !== null) {
     states.groupStatus = status;
     return;
@@ -370,14 +396,14 @@ setInterval(() => {
           <td>
             <select v-model="group.Product" class="select select-bordered" @change="handleProductChange(group)">
               <option disabled value="">Select a tag</option>
-              <option>IaaS</option>
-              <option>CDN</option>
-              <option>VOD</option>
-              <option>Object</option>
-              <option>CaaS</option>
-              <option>DBaaS</option>
-              <option>Panel</option>
-              <option>Abuse</option>
+              <option value="IaaS">IaaS</option>
+              <option value="CDN">CDN</option>
+              <option value="VOD">VOD</option>
+              <option value="Object">Object</option>
+              <option value="CaaS">CaaS</option>
+              <option value="DBaaS">DBaaS</option>
+              <option value="Panel">Panel</option>
+              <option value="Abuse">Abuse</option>
             </select>
           </td>
           <td>
@@ -404,10 +430,26 @@ setInterval(() => {
          :show="states.editCommentModal.show"
          type="confirm"
          :on-success="edit"
-         :on-success-args="[states.editCommentModal.topicID, states.editCommentModal.comment]"
+         :on-success-args="[states.editCommentModal.topicID, states.editCommentModal.comment, states.editCommentModal.selectedProduct, states.editCommentModal.selectedTag]"
          @update="editCommentShowUpdateHandler">
     <div style="text-align: center">
       <span style="direction: rtl; font-weight: bold">{{ states.editCommentModal.name }}</span>
+      <select v-model="states.editCommentModal.selectedProduct" class="select select-bordered" @change="handleproductChange(group)">
+  <option disabled value="Select a tag" >Select a tag</option>
+  <option value="IaaS">IaaS</option>
+  <option value="CDN">CDN</option>
+  <option value="VOD">VOD</option>
+  <option value="Object">Object</option>
+  <option value="CaaS">CaaS</option>
+  <option value="DBaaS">DBaaS</option>
+  <option value="Panel">Panel</option>
+  <option value="Abuse">Abuse</option>
+</select>
+<select v-model="states.editCommentModal.selectedTag" class="select select-bordered">
+  <option disabled value="Select a tag">Select a tag</option>
+  <option v-for="tag in updateSecondTagOptions(states.editCommentModal.selectedProduct)" :key="tag">{{ tag }}</option>
+</select>
+
       <textarea v-model="states.editCommentModal.comment"
                 class="textarea textarea-bordered"
                 style="width: 100%; margin-top: 20px; direction: rtl"
