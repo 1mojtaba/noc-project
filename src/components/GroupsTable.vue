@@ -7,33 +7,8 @@ import Groups from '../scripts/groups.js';
 import edit from "../scripts/comment.js";
 import Modal from "./Modal.vue";
 import Navbar from "./Navbar.vue";
-const demoGroups = [
-  {
-    topicID: 1,
-    GroupName: "Group Alpha",
-    AcknowledgeBy: "John Doe",
-    Time: "2024-07-10",
-    Comment: "Initial setup completed.",
-    Is_new: 1,
-  },
-  {
-    topicID: 2,
-    GroupName: "Group Beta",
-    AcknowledgeBy: "Jane Smith",
-    Time: "2024-07-11",
-    Comment: "Pending review.",
-    Is_new: 1,
-  },
-  {
-    topicID: 3,
-    GroupName: "Group Gamma",
-    AcknowledgeBy: "Alice Johnson",
-    Time: "2024-07-12",
-    Comment: "Needs approval.",
-    Is_new: 0,
-  },
-];
-const getGroups = async (groups = demoGroups) => {
+
+const getGroups = async (groups = null) => {
   if (groups === null) {
     groups = await Groups.getGroups();
   }
@@ -94,7 +69,7 @@ const getArchivedGroups = groups => {
 };
 
 
-const changeGroupStatus = async (status = demoGroups) => {
+const changeGroupStatus = async (status = null) => {
   if (status !== null) {
     states.groupStatus = status;
     return;
