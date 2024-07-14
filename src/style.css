@@ -63,6 +63,12 @@ button:focus-visible {
 .label-text{
   margin-right: 10px;
 }
+.title-span{
+  display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: space-around;
+}
 #app {
   max-width: 1480px;
   margin: 0 auto;
